@@ -66,8 +66,34 @@ return {
 			end,
 		})
 
-		vim.keymap.set("n", "<leader>l", function()
+		vim.keymap.set("n", "<leader>ll", function()
 			try_linting()
 		end, { desc = "Trigger linting for current file" })
+
+		vim.diagnostic.config({
+			virtual_text = {
+				-- Set to true to display the error/warning message inline next to the code
+				enabled = true,
+				-- Optional: configure how the text is rendered
+				severity = { min = "HINT", max = "ERROR" },
+				source = true, -- Show the source (e.g., "eslint_d")
+			},
+			-- Show signs in the sign column (which you already see)
+			signs = true,
+			-- Set how the text is displayed under the problematic code
+			underline = true,
+			-- Enable the diagnostic pop-up when hovering over an error
+			float = {
+				focusable = false,
+				style = "minimal",
+				border = "rounded",
+				source = "always",
+				header = "",
+				prefix = "",
+			},
+		})
+
+		-- Keymap to show the diagnostic message under the cursor in a floating window
+		vim.keymap.set("n", "<leader>d", vim.diagnostic.open_float, { desc = "Show diagnostic error" })
 	end,
 }

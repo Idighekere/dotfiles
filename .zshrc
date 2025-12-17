@@ -1,5 +1,6 @@
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:$HOME/.local/bin:/usr/local/bin:$PATH
+export PATH="/home/idighs/.local/bin:$PATH"
 
 # Path to your Oh My Zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
@@ -127,9 +128,11 @@ alias off-mongod='mongod --shutdown --dbpath "C:\Program Files\MongoDB\Server\8.
 alias tree="tree -I 'node_modules|dist|build|.next|.build'"
 # alias js2ts="find . -type f -name "*.js" ! -path "./node_modules/*" -exec bash -c 'mv "$0" "${0%.js}.ts"' {} \;"
 # alias ts2js="find . -type f -name "*.ts" ! -path "./node_modules/*" -exec bash -c 'mv "$0" "${0%.ts}.js"' {} \;"
-
+alias vlc="flatpak run org.videolan.VLC"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-
+alias android-studio="/opt/android-studio/bin/studio"
+# Alias for Responsively AppImage
+alias responsively='~/Applications/ResponsivelyApp-1.17.1.AppImage'
 
 # Alias for removing directories with confirmation
 alias rmrf='rm_directory() {
@@ -203,7 +206,8 @@ export EDITOR='nvim'
 # Fast directory switching (optional)
 # export CDPATH=.:~:~/projects
 export CDPATH=.:/home/idighs/Projects
-
+# R Personal Library Path
+export R_LIBS_USER="/home/idighs/R/x86_64-redhat-linux-gnu-library/4.5"
 # Custom greeting message (optional)
 echo "Welcome back, $(whoami)! Happy coding ☺️"
 

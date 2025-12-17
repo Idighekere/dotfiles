@@ -16,7 +16,7 @@ return {
 		require("mason").setup()
 		require("mason-lspconfig").setup({
 			ensure_installed = {
-				"ts_ls",
+				"ts_ls", -- vtsls uses ts_ls
 				"eslint",
 				"html",
 				"cssls",
@@ -36,30 +36,34 @@ return {
 		local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
 		---------------------------------------------------------
-		-- NEW API (required):
-		-- vim.lsp.config(server_name, { settings })
-		-- vim.lsp.enable(server_name)
+		-- TypeScript / JavaScript via vtsls
 		---------------------------------------------------------
+		-- Disable the old tsserver to avoid conflicts
+		vim.lsp.config("tsserver", {
+			on_attach = function() end,
+		})
 
-		-----------------------------
-		-- TypeScript / JavaScript --
-		-----------------------------
-		vim.lsp.config("ts_ls", {
+		-- Use vtsls instead
+		vim.lsp.config("vtsls", {
 			capabilities = capabilities,
 			filetypes = {
 				"javascript",
+				"javascript.jsx",
 				"javascriptreact",
 				"typescript",
+				"typescript.tsx",
 				"typescriptreact",
 			},
-			init_options = {
-				preferences = {
-					-- importModuleSpecifierPreference = "relative",
+			settings = {
+				typescript = {
+					updateImportsOnFileMove = { enabled = "always" },
+					inlayHints = { parameterNames = { enabled = "all" } },
 				},
+				javascript = {}, -- copy TS settings if needed
 			},
 			root_markers = { "package.json", "tsconfig.json", ".git" },
 		})
-		vim.lsp.enable("ts_ls")
+		vim.lsp.enable("vtsls")
 
 		-----------
 		-- ESLint --
