@@ -43,6 +43,11 @@ return {
 			git = {
 				ignore = false,
 			},
+			update_focused_file = {
+				enable = true,
+				update_cwd = true, -- optional: change the current working directory to the buffer's path
+				ignore_list = {}, -- optional: list of buffer names to ignore
+			},
 		})
 
 		-- set keymaps

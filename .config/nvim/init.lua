@@ -16,6 +16,8 @@ vim.keymap.set("n", "<leader>oa", function()
 	require("otter").activate({ "python", "lua", "bash" })
 end, { desc = "Otter Activate" })
 
+vim.keymap.set("n", "<leader>nf", ":NvimTreeFindFile<CR>", { desc = "Find current file in NvimTree" }) -- To find current file in NvimTree
+
 require("idighs.core")
 require("idighs.core.keymaps")
 require("idighs.lazy")
