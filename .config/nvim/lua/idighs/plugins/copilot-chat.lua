@@ -1,0 +1,88 @@
+return {
+	-- {
+	-- 	"CopilotC-Nvim/CopilotChat.nvim",
+	-- 	dependencies = {
+	-- 		{ "zbirenbaum/copilot.lua" }, -- or github/copilot.vim
+	-- 		{ "nvim-lua/plenary.nvim" }, -- for curl, log wrapper
+	-- 	},
+	-- 	build = "make tiktoken", -- Only on MacOS or Linux
+	-- 	opts = {
+	-- 		-- See Configuration section for options
+	-- 	},
+	-- 	config = function()
+	-- 		local chat = require("CopilotChat")
+	--
+	-- 		chat.setup({
+	-- 			-- Disable default mappings to prevent conflicts
+	-- 			mappings = {
+	-- 				complete = {
+	-- 					insert = "",
+	-- 				},
+	-- 				close = {
+	-- 					normal = "q",
+	-- 					insert = "<C-c>",
+	-- 				},
+	-- 				reset = {
+	-- 					normal = "<C-l>",
+	-- 					insert = "<C-l>",
+	-- 				},
+	-- 				submit_prompt = {
+	-- 					normal = "<CR>",
+	-- 					insert = "<C-s>", -- Ctrl+s to submit prompt in insert mode
+	-- 				},
+	-- 				accept_diff = {
+	-- 					normal = "<C-y>",
+	-- 					insert = "<C-y>",
+	-- 				},
+	-- 				yank_diff = {
+	-- 					normal = "gy",
+	-- 				},
+	-- 				show_diff = {
+	-- 					normal = "gd",
+	-- 				},
+	-- 				show_system_prompt = {
+	-- 					normal = "gp",
+	-- 				},
+	-- 				show_user_selection = {
+	-- 					normal = "gs",
+	-- 				},
+	-- 			},
+	-- 		})
+	--
+	-- 		-- Custom Non-Conflicting Keybindings (Leader-based)
+	--
+	-- 		-- 1. Toggle Chat Window
+	-- 		vim.keymap.set("n", "<leader>cc", function()
+	-- 			chat.toggle()
+	-- 		end, { desc = "Copilot Chat Toggle" })
+	--
+	-- 		-- 2. Explain the selected code
+	-- 		vim.keymap.set("v", "<leader>ce", function()
+	-- 			chat.ask("Explain how this code works", { selection = require("CopilotChat.select").visual })
+	-- 		end, { desc = "Copilot Explain Code" })
+	--
+	-- 		-- 3. Fix the selected code
+	-- 		vim.keymap.set("v", "<leader>cf", function()
+	-- 			chat.ask("Fix this code", { selection = require("CopilotChat.select").visual })
+	-- 		end, { desc = "Copilot Fix Code" })
+	--
+	-- 		-- 4. Optimize/Refactor
+	-- 		vim.keymap.set("v", "<leader>co", function()
+	-- 			chat.ask("Optimize this code", { selection = require("CopilotChat.select").visual })
+	-- 		end, { desc = "Copilot Optimize Code" })
+	--
+	-- 		-- 5. Generate Tests
+	-- 		vim.keymap.set("v", "<leader>ct", function()
+	-- 			chat.ask("Generate tests for this code", { selection = require("CopilotChat.select").visual })
+	-- 		end, { desc = "Copilot Generate Tests" })
+	--
+	-- 		-- 6. Quick Chat (One-off question without opening full window)
+	-- 		vim.keymap.set("n", "<leader>cq", function()
+	-- 			local input = vim.fn.input("Quick Chat: ")
+	-- 			if input ~= "" then
+	-- 				chat.ask(input, { selection = require("CopilotChat.select").buffer })
+	-- 			end
+	-- 		end, { desc = "Copilot Quick Chat" })
+	-- 	end,
+	-- },
+}

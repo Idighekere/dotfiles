@@ -6,6 +6,9 @@ vim.api.nvim_create_autocmd("LspAttach", {
 	callback = function(ev)
 		local opts = { buffer = ev.buf, silent = true }
 
+		-- Replace the standard gd with Telescope's version
+		keymap.set("n", "<leader>gs", "<cmd>Telescope lsp_definitions<cr>", { desc = "Show Definition" })
+
 		-- Go to TS source definition using vtsls
 		opts.desc = "Go to TS source definition"
 		keymap.set("n", "gd", function()

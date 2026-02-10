@@ -17,6 +17,7 @@ vim.keymap.set("n", "<leader>oa", function()
 end, { desc = "Otter Activate" })
 
 vim.keymap.set("n", "<leader>nf", ":NvimTreeFindFile<CR>", { desc = "Find current file in NvimTree" }) -- To find current file in NvimTree
+vim.opt.termguicolors = true -- Enable true color support
 
 require("idighs.core")
 require("idighs.core.keymaps")
