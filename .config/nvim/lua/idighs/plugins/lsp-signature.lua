@@ -8,7 +8,7 @@ return {
 		},
 		-- Add toggle key to close/open signature with Ctrl+k
 		toggle_key = "<C-k>",
-		-- Allow closing with 'q' when focused on the signature window
+		-- Auto-close signature popup on cursor movement or typing
 		close_events = { "CursorMoved", "BufHidden", "InsertCharPre" },
 		-- Floating window options
 		floating_window = true,
