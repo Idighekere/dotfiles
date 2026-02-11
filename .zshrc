@@ -106,15 +106,23 @@ export PATH="$PATH:$HOME/.bun/bin"
 alias reload-zsh='source ~/.zshrc'
 alias edit-zsh="nvim ~/.zshrc"
 # alias vim = "nvim"
+alias ts='tmuxinator start'
+alias tl='tmuxinator list'
+alias mux="tmuxinator"
 alias ll='ls -alF --color=auto'
 alias la='ls -A'
 alias l='ls -CF'
 alias gs='git status'
 alias gd='git diff'
 alias gco='git checkout'
-alias .='cd ..'
-alias ..='cd ../..'
-alias ...='cd ../../..'
+# alias .='cd ..'
+# alias ..='cd ../..'
+# alias ...='cd ../../..'
+# added the SILENT_CD variable to prevent the auto-ls from running after cd when using these aliases
+alias .='SILENT_CD="true"; cd ..'
+alias ..='SILENT_CD="true"; cd ../..'
+alias ...='SILENT_CD="true"; cd ../../../'
+alias dev='SILENT_CD="true"; cd ~/dev'
 alias nrd="npm run dev"
 alias nb="npm run build"
 alias prd="pnpm run dev"
@@ -133,7 +141,12 @@ alias vlc="flatpak run org.videolan.VLC"
 alias android-studio="/opt/android-studio/bin/studio"
 # Alias for Responsively AppImage
 alias responsively='~/Applications/ResponsivelyApp-1.17.1.AppImage'
-
+alias C='wl-copy'
+alias V='wl-paste'
+# Copy current directory path
+alias cpwd='pwd | tr -d "\n" | C'
+# Shows folders in 01-active not modified in the last 30 days
+alias check-stale='find ~/dev/01-active -maxdepth 2 -type d -mtime +30'
 # Alias for removing directories with confirmation
 alias rmrf='rm_directory() {
     if [ -z "$1" ]; then
@@ -152,6 +165,43 @@ alias rmrf='rm_directory() {
     fi
 }; rm_directory'
 
+# Auto-ls after cd with a "noise filter"
+chpwd() {
+    emulate -L zsh
+    
+    # Define folders you want to ignore
+    local ignore_folders=("node_modules" ".git" ".venv" "bin" "obj", "Debug", "dist", "build", ".next", ".build", "output", "logs")
+
+    # Get the name of the current directory
+    local current_dir="${PWD##*/}"
+
+    # Check if the current directory is in the ignore list
+    if [[ ! " ${ignore_folders[@]} " =~ " ${current_dir} " ]]; then
+        echo -e "\e[1;34mListing $PWD...\e[0m" # Optional: A nice header
+        ls -CF --color=auto
+    else
+        echo -e "\e[1;33mSkipping ls for noise-heavy directory: $current_dir\e[0m"
+    fi
+}
+# Jump to project (~/dev) with initial search term
+j() {
+    local dir
+    # Added '-not -path "*/node_modules/*"' to keep the search clean
+    dir=$(find ~/dev -maxdepth 3 -not -path "*/node_modules/*" -type d | fzf --height 40% --reverse --query="$1" --prompt="Go to: ")
+    
+    if [[ -n "$dir" ]]; then
+        cd "$dir"
+    fi
+}
+
+v() {
+  # If no arguments ($# -eq 0), open current dir, otherwise open the files passed
+  if [ $# -eq 0 ]; then
+    nvim .
+  else
+    nvim "$@"
+  fi
+}
 # Function to download boilerplate from my github
 #Bp means - boilerplate
 
@@ -206,10 +256,43 @@ export EDITOR='nvim'
 # Fast directory switching (optional)
 # export CDPATH=.:~:~/projects
 export CDPATH=.:/home/idighs/Projects
+export CDPATH=.:/home/idighs/dev
 # R Personal Library Path
 export R_LIBS_USER="/home/idighs/R/x86_64-redhat-linux-gnu-library/4.5"
 # Custom greeting message (optional)
-echo "Welcome back, $(whoami)! Happy coding ☺️"
+# do not forhet to install figlet and lolcat for this to work, otherwise it will just print the text without colors
+# Function to center figlet output with blue color
+center_figlet_blue() {
+    local text="idighs"
+    local term_width=$(tput cols)
+    
+    # 1. Get the width of the widest figlet line
+    local figlet_width=$(figlet -f slant "$text" | awk '{ if (length > max) max = length } END { print max }')
+    
+    # 2. Calculate left padding
+    local padding=$(( (term_width - figlet_width) / 2 ))
+    
+    # 3. Print in Bold Blue (\e[1;34m)
+    echo -ne "\e[1;34m"
+    if [ $padding -gt 0 ]; then
+        # Add the padding to the start of every line
+        figlet -f slant "$text" | sed "s/^/$(printf '%*s' $padding)/"
+    else
+        figlet -f slant "$text"
+    fi
+    echo -ne "\e[0m" # Reset color
+}
+
+# Run it
+clear
+center_figlet_blue
+
+# Center the welcome message in Blue as well
+msg="Welcome back, $(whoami)! Happy coding ☺️"
+echo -ne "\e[1;34m"
+printf "%*s\n" $(((${#msg}+$(tput cols))/2)) "$msg"
+echo -ne "\e[0m"
+echo ""
 
 # Autosuggestions
 source ~/.config/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
