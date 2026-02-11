@@ -6,23 +6,8 @@ vim.api.nvim_create_autocmd("LspAttach", {
 	callback = function(ev)
 		local opts = { buffer = ev.buf, silent = true }
 
-		-- Replace the standard gd with Telescope's version
-		keymap.set("n", "<leader>gs", "<cmd>Telescope lsp_definitions<cr>", { desc = "Show Definition" })
-
-		-- Go to TS source definition using vtsls
-		opts.desc = "Go to TS source definition"
-		keymap.set("n", "gd", function()
-			local success, _ = pcall(function()
-				require("lazyvim.util").lsp_execute({
-					command = "typescript.goToSourceDefinition",
-					arguments = { vim.uri_from_bufnr(0), vim.api.nvim_win_get_cursor(0) },
-					open = true,
-				})
-			end)
-			if not success then
-				vim.lsp.buf.definition() -- fallback if vtsls not available
-			end
-		end, opts)
+		-- Go to definition (gd)
+		keymap.set("n", "gd", "<cmd>Telescope lsp_definitions<CR>", { buffer = ev.buf, desc = "Go to definition" })
 
 		-- Keep gD for normal declaration
 		opts.desc = "Go to declaration"

@@ -11,12 +11,11 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
--- require("lazy").setup("idighs.plugins")
-
 require("lazy").setup({
 	spec = {
 		{ import = "idighs.plugins" },
 		{ import = "idighs.plugins.lsp" },
+		require("idighs.plugins.markdown-jupyter"),
 	},
 	checker = {
 		enabled = true,
@@ -26,5 +25,3 @@ require("lazy").setup({
 		notify = false,
 	},
 })
-
-require("lazy").setup(require("idighs.plugins.markdown-jupyter"))

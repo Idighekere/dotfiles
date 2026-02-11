@@ -1,5 +1,4 @@
-require("idighs.core.options")
--- Define the global leader key (must be done before keymaps.lua is loaded)
+-- Define the global leader key (must be done before lazy.nvim loads)
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
@@ -16,9 +15,8 @@ vim.keymap.set("n", "<leader>oa", function()
 	require("otter").activate({ "python", "lua", "bash" })
 end, { desc = "Otter Activate" })
 
-vim.keymap.set("n", "<leader>nf", ":NvimTreeFindFile<CR>", { desc = "Find current file in NvimTree" }) -- To find current file in NvimTree
 vim.opt.termguicolors = true -- Enable true color support
 
 require("idighs.core")
-require("idighs.core.keymaps")
 require("idighs.lazy")
+require("idighs.lsp")

@@ -1,5 +1,3 @@
--- set leader key to space
-vim.g.mapleader = " "
 local opts = { noremap = true, silent = true }
 local keymap = vim.keymap -- for conciseness
 
