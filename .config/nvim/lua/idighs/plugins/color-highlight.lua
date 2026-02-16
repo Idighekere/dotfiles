@@ -1,23 +1,23 @@
 return {
-	-- "brenoprata10/nvim-highlight-colors",
-	-- event = { "BufReadPre", "BufNewFile" },
-	-- opts = {
-	-- 	---@usage 'background'|'foreground'|'virtualtext'
-	-- 	render = "virtualtext", -- "virtualtext" is the modern VS Code style
-	--
-	-- 	-- Set this to 'true' to enable highlighting for Tailwind CSS
-	-- 	enable_tailwind = true,
-	--
-	-- 	-- This adds a small icon/square if using virtualtext
-	-- 	virtual_symbol = "■",
-	--
-	-- 	-- Set to true to show colors in the column next to line numbers
-	-- 	enable_named_colors = true,
-	--
-	-- 	-- Set to true to highlight short hex codes like #fff
-	-- 	enable_short_hex = true,
-	-- },
-	-- config = function(_, opts)
-	-- 	require("nvim-highlight-colors").setup(opts)
-	-- end,
+	"brenoprata10/nvim-highlight-colors",
+	event = { "BufReadPre", "BufNewFile" },
+	opts = {
+		---@usage 'background'|'foreground'|'virtualtext'
+		render = "background",
+
+		-- Enable Tailwind CSS color resolution (reads your project config)
+		enable_tailwind = true,
+
+		-- Virtual text icon
+		virtual_symbol = "■",
+
+		-- Highlight named CSS colors like "Red", "Blue"
+		enable_named_colors = true,
+
+		-- Highlight short hex codes like #fff
+		enable_short_hex = true,
+	},
+	config = function(_, opts)
+		require("nvim-highlight-colors").setup(opts)
+	end,
 }

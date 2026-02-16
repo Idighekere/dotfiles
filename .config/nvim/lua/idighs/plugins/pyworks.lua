@@ -15,7 +15,7 @@ return {
 		config = function()
 			require("pyworks").setup({
 				python = {
-					-- use_uv = true,  -- Use uv for faster package installation
+					use_uv = true, -- Use uv for faster package installation
 				},
 				image_backend = "kitty", -- or "ueberzug" for other terminals
 			})

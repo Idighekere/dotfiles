@@ -49,11 +49,23 @@ return {
 		priority = 1000, -- make sure to load this before all the other start plugins
 		config = function()
 			require("onedark").setup({
-				style = "deep", -- Choose between 'dark', 'darker', 'cool', 'deep', 'warm', 'warmer' and 'light'
+				style = "deep",
+				transparent = true,
+
+				code_style = {
+					comments = "italic",
+					keywords = "bold",
+					functions = "bold",
+					strings = "none",
+					variables = "none",
+				},
+
 				highlights = {
-					-- Change #3e4451 to something brighter like #5c6370 or a custom tint
-					-- "bg" is the background color of the selection
 					["Visual"] = { bg = "#4a5264" },
+					["@keyword.return"] = { fmt = "bold,italic" },
+					["@type.builtin"] = { fmt = "italic" },
+					["@constant.builtin"] = { fmt = "bold,italic" },
+					["@parameter"] = { fmt = "italic" },
 				},
 			})
 			require("onedark").load()
