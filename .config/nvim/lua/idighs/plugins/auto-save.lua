@@ -25,7 +25,7 @@ return {
 			return true
 		end,
 		write_all_buffers = false,
-		debounce_delay = 3000, -- Wait 3 second after last change before saving
+		debounce_delay = 1000, -- Wait 1 second after last change before saving
 		noautocmd = false,
 		lockmarks = false,
 		debug = false,
