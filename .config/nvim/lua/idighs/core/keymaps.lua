@@ -6,9 +6,14 @@ local keymap = vim.keymap -- for conciseness
 
 -- use jk to exit insert mode
 keymap.set("i", "jj", "<ESC>", { desc = "Exit insert mode with jj" })
-
+keymap.set("i", "jk", "<ESC>", { desc = "Exit insert mode with jk" })
 -- clear search highlights
-keymap.set("n", "<leader>nh", ":nohl<CR>", { desc = "Clear search highlights" })
+vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<cr>", { desc = "Clear search highlights" })
+-- Keymap to activate otter for the current buffer
+vim.keymap.set("n", "<leader>oa", function()
+	-- The list of languages you want otter to look for
+	require("otter").activate({ "python", "lua", "bash" })
+end, { desc = "Otter Activate" })
 
 -- delete single character without copying into register
 keymap.set("n", "x", '"_x')
@@ -29,4 +34,10 @@ keymap.set("n", "<leader>tn", "<cmd>tabn<CR>", { desc = "Go to next tab" }) --  
 keymap.set("n", "<leader>tp", "<cmd>tabp<CR>", { desc = "Go to previous tab" }) --  go to previous tab
 keymap.set("n", "<leader>tf", "<cmd>tabnew %<CR>", { desc = "Open current buffer in new tab" }) --  move current buffer to new tab
 
-keymap.set("n", "<leader>fp", "<cmd>Telescope find_files<cr>", opts)
+-- Normal mode: Move line up/down
+vim.keymap.set("n", "<A-j>", ":m .+1<CR>==", { desc = "Move line down" })
+vim.keymap.set("n", "<A-k>", ":m .-2<CR>==", { desc = "Move line up" })
+
+-- Visual mode: Move selected block up/down
+vim.keymap.set("v", "<A-j>", ":m '>+1<CR>gv=gv", { desc = "Move block down" })
+vim.keymap.set("v", "<A-k>", ":m '<-2<CR>gv=gv", { desc = "Move block up" })
